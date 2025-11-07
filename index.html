@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>nutmilk-dev</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <style>
+      :root {
+        --bg: #f9f9fb;
+        --accent: #5c6bc0;
+        --text: #333;
+        --border: #ddd;
+      }
+
+      body {
+        margin: 0;
+        font-family: system-ui, sans-serif;
+        background: var(--bg);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 4rem 1.5rem;
+        color: var(--text);
+        line-height: 1.6;
+      }
+
+      h1 {
+        font-size: 2.2rem;
+        margin-bottom: 0.5rem;
+        color: var(--accent);
+      }
+
+      p {
+        max-width: 40rem;
+        text-align: center;
+        font-size: 1.1rem;
+      }
+
+      button {
+        padding: 0.6rem 1.2rem;
+        font-size: 1rem;
+        margin-top: 2rem;
+        border: 2px solid var(--accent);
+        background: transparent;
+        color: var(--accent);
+        cursor: pointer;
+        border-radius: 6px;
+        transition: 0.2s ease;
+      }
+
+      button:hover {
+        background: var(--accent);
+        color: white;
+      }
+
+      footer {
+        margin-top: 4rem;
+        font-size: 0.9rem;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>nutmilk-dev</h1>
+    <p>
+      Welcome to my GitHub Pages experiment. This is a small corner of the web
+      where I'll share notes, ideas, code, and other interesting things.
+    </p>
+
+    <button id="surpriseBtn">Click me</button>
+
+    <footer>© <span id="year"></span> nutmilk-dev</footer>
+
+    <script>
+      document.getElementById("surpriseBtn").addEventListener("click", () => {
+        alert("Thanks for dropping by 🍶");
+      });
+
+      document.getElementById("year").innerText = new Date().getFullYear();
+    </script>
+  </body>
+</html>
