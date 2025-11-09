@@ -251,22 +251,34 @@
       <section class="hero">
         <div>
           <div class="kicker">2025 limited lot • 250 ml</div>
-          <h1>Single-Origin Nutmilk<br />for the Unreasonably Particular</h1>
+          <div class="kicker">The freshest and best nut you'll ever taste.</div>
+          <h1>Single-Origin Nutmilk</h1>
+          <h3>Handpressed, Eye-seen, Nose-smelled, ArtisANAL</h3>
           <p class="lead">
-            Pressed in tiny numbers. Finished by hand. A velvet-smooth profile
-            with toasted almond, pistachio bloom, and a whisper of raw cashew.
+            Cold-pressed in micro-batches so rare they make NFTs look common.
+            Hand-finished by someone who probably consumes more protein in grams
+            than you have dollars in your bank. Silky nut-juice with almond
+            undertones, pistachio, almonds, and raw cashew that whispers “ayo?
+            trailmixge” in your ear.
           </p>
 
           <div class="priceRow">
             <div class="price">
-              <span class="strike" id="compare">$128</span>
-              <span id="price">$88</span>
+              <span class="strike" id="compare">$69420</span>
+              <span id="price">$???</span>
               <span class="note" id="currency">USD</span>
             </div>
-            <button class="cta" id="inviteBtn">Request Invitation</button>
+
+            <a
+              href="https://streamlabs.com/sl_id_158c4a6a-b0ba-305a-a5da-6a975d09d720/tip"
+              class="cta-link"
+            >
+              <button class="cta" id="inviteBtn">Request Invitation</button>
+            </a>
           </div>
           <div class="note">
-            Ships in temperature-controlled packaging. 1 bottle per customer.
+            Ships in temperature-uncontrolled packaging. 1 bottle per customer.
+            If even...
           </div>
         </div>
 
@@ -274,13 +286,13 @@
           <picture>
             <!-- If you keep a larger image as nutmilk@2x.jpg, the browser will use it on Retina displays -->
             <img
-              src="nutmilk.jpg"
-              srcset="nutmilk.jpg 1x, nutmilk.png 2x"
+              src="nutmilk.png"
+              srcset="nutmilk.png"
               alt="Nuna’s Nutmilk bottle with mixed nuts"
               style="display: block; width: 100%; height: auto"
             />
           </picture>
-          <div class="seal">Batch Nº 002 • 2025</div>
+          <div class="seal">Batch Nº 001 • 2025</div>
         </figure>
       </section>
 
@@ -290,8 +302,8 @@
         <article class="card">
           <h3>Provenance</h3>
           <p>
-            Sourced from a single grove cooperative. Each nut is graded by hand
-            before overnight cold-soak.
+            Sourced from a single sources separately. Each nut is probably
+            handgraded by an esteemed panel of nut sommeliers.
           </p>
           <div class="stamp">
             <svg
@@ -310,8 +322,8 @@
         <article class="card">
           <h3>Texture</h3>
           <p>
-            Unfiltered satin body with a lingering praline finish. Zero gums,
-            stabilisers, or shortcuts.
+            Sus use of cloth to achieve that satin body with a lingering taste
+            of destitute. Zero gums, stabilisers – only shortcuts.
           </p>
           <div class="stamp">
             <svg
@@ -321,17 +333,17 @@
               fill="currentColor"
               aria-hidden="true"
             >
-              <path d="M4 12h16M4 6h16M4 18h16" />
+              <path d="M12 2l3 7h7l-5.5 4 2 7L12 17l-6.5 3 2-7L2 9h7z" />
             </svg>
             Nothing Added
           </div>
         </article>
 
         <article class="card">
-          <h3>Ritual</h3>
+          <h3>Responsibility</h3>
           <p>
-            Serve chilled in a small glass. Pairs irresponsibly well with dark
-            chocolate and quiet mornings.
+            Prepared in a small glass. Pairs irresponsibly well with dark humor
+            and darker memes.
           </p>
           <div class="stamp">
             <svg
@@ -343,16 +355,46 @@
             >
               <path d="M12 21a9 9 0 100-18 9 9 0 000 18z" />
             </svg>
-            Morning-Only
+            Emotional Damage
           </div>
         </article>
       </section>
 
       <div class="divider"></div>
+      <div class="divider"></div>
+
+      <section id="reviews" aria-label="Customer Reviews">
+        <h2 style="font: 200 36px Inter; margin-bottom: 12px">Reviews</h2>
+        <!-- <div class="grid reviews-grid"></div> -->
+      </section>
+
+      <script>
+        const reviewsData = [
+          {
+            name: "James McRealPerson",
+            rating: 4,
+            text: "I love how the milky nut feels in my mouth",
+          },
+          {
+            name: "JuiceLord420",
+            rating: 5,
+            text: "This nutmilk got me questioning my life choices... in a good way. Absolutely bussin fr fr no cap.",
+          },
+          {
+            name: "NutsForDays",
+            rating: 5,
+            text: "Smooth af, almost TOO smooth. Like, what kind of machine did they use? I fear for my tastebuds.",
+          },
+          {
+            name: "CashewCommander",
+            rating: 5,
+            text: "Thought this was a meme but it slapped harder than a Twitch ban. Would nut again.",
+          },
+        ];
+      </script>
 
       <footer class="footer">
         <span>© <span id="year"></span> Nuna’s NUTMILK</span>
-        <span><a href="#" id="toggleCurrency">View in SGD</a></span>
       </footer>
     </div>
 
@@ -360,35 +402,19 @@
       // footer year
       document.getElementById("year").textContent = new Date().getFullYear();
 
-      // playful "invite" modal substitute
-      document.getElementById("inviteBtn").addEventListener("click", () => {
-        const email = prompt("Request an invitation:\nEnter your email");
-        if (email && /\S+@\S+\.\S+/.test(email)) alert("We’ll be in touch. 🥛");
-      });
+      const reviewsContainer = document.getElementById("reviews");
 
-      // very lightweight currency toggle (USD <-> SGD)
-      (function () {
-        const priceEl = document.getElementById("price");
-        const compareEl = document.getElementById("compare");
-        const curEl = document.getElementById("currency");
-        const link = document.getElementById("toggleCurrency");
-        let sgd = false;
-        link.addEventListener("click", (e) => {
-          e.preventDefault();
-          sgd = !sgd;
-          if (sgd) {
-            priceEl.textContent = "SGD 119";
-            compareEl.textContent = "SGD 174";
-            curEl.textContent = "";
-            link.textContent = "View in USD";
-          } else {
-            priceEl.textContent = "$88";
-            compareEl.textContent = "$128";
-            curEl.textContent = "USD";
-            link.textContent = "View in SGD";
-          }
-        });
-      })();
+      reviewsData.forEach((review) => {
+        const reviewCard = document.createElement("article");
+        reviewCard.className = "card";
+
+        const stars = "⭐".repeat(review.rating);
+
+        reviewCard.innerHTML = `
+      <h3>${stars} — ${review.name}</h3>
+      <p>${review.text}</p>`;
+        reviewsContainer.appendChild(reviewCard);
+      });
     </script>
   </body>
 </html>
