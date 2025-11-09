@@ -1,6 +1,6 @@
 # Joke Website for Nuna's Nutmilk
 Satirical ultra-luxury landing page for the world's most exclusive, hand-pressed nutmilk.
-<img src="imgs/screenshot.png" alt="Nuna’s Nutmilk header image" width="720">
+<img src="imgs/nutmilk.jpg" alt="Nuna’s Nutmilk header image" width="720">
 
 ### Live Preview  
 **https://nutmilk-dev.github.io/**
