@@ -1,6 +1,6 @@
 # Joke Website for Nuna's Nutmilk
 Satirical ultra-luxury landing page for the world's most exclusive, hand-pressed nutmilk.
-<img src="imgs/screenshot.png" alt="Nuna’s Nutmilk header image" width="480">
+<img src="imgs/screenshot.png" alt="Nuna’s Nutmilk header image" width="720">
 
 ### Live Preview  
 **https://nutmilk-dev.github.io/**
@@ -23,3 +23,8 @@ This site is fully static. To preview it locally:
    ```bash
    git clone https://github.com/nutmilk-dev/nutmilk-dev.github.io.git
    cd nutmilk-dev.github.io
+
+2. ```bash
+   npx serve
+   python3 -m http.server
+   open index.html
