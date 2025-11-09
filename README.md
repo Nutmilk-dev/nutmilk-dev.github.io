@@ -11,7 +11,7 @@ Satirical ultra-luxury landing page for the world's most exclusive, hand-pressed
 
 This is a static single-page site intended to parody high-end DTC (direct-to-consumer) product marketing. 
 It features mock-luxury branding, tongue-in-cheek copywriting, and minimalist design inspired by premium food sites like Oatly and Blue Bottle—except the product is nut milk, and the satire is intentional. 
-There is no build step. No frameworks. Just **HTML**, **CSS**, and a tiny bit of **vanilla JavaScript**.
+There is no build step. No frameworks. Just **a static HTML**.
 
 ---
 
