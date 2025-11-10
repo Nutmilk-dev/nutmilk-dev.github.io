@@ -165,7 +165,7 @@
         border: 1px solid var(--line);
         border-radius: 16px;
         padding: 18px 16px;
-        min-height: 140px;
+        min-height: 80px;
       }
       .card h3 {
         margin: 0 0 6px 0;
@@ -574,7 +574,7 @@
         prevBtn.addEventListener("click", () => setActive(index - 1));
         nextBtn.addEventListener("click", () => setActive(index + 1));
 
-        // keyboard support when buttons are focused
+        // Keyboard support when buttons are focused
         [prevBtn, nextBtn].forEach((btn) => {
           btn.addEventListener("keydown", (e) => {
             if (e.key === "ArrowLeft") setActive(index - 1);
@@ -582,13 +582,13 @@
           });
         });
 
-        // click dots to navigate
+        // Optional: click dots to navigate
         dots.forEach((d, i) => d.addEventListener("click", () => setActive(i)));
 
-        // simple auto-advance
-        setInterval(() => setActive(index + 1), 5000);
+        // Optional: simple auto-advance (uncomment to enable)
+        // setInterval(() => setActive(index + 1), 5000);
 
-        // basic swipe (touch)
+        // Optional: basic swipe (touch)
         let startX = null;
         track.addEventListener(
           "touchstart",
