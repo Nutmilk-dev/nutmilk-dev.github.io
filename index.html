@@ -574,7 +574,7 @@
         prevBtn.addEventListener("click", () => setActive(index - 1));
         nextBtn.addEventListener("click", () => setActive(index + 1));
 
-        // Keyboard support when buttons are focused
+        // keyboard support when buttons are focused
         [prevBtn, nextBtn].forEach((btn) => {
           btn.addEventListener("keydown", (e) => {
             if (e.key === "ArrowLeft") setActive(index - 1);
@@ -582,13 +582,13 @@
           });
         });
 
-        // Optional: click dots to navigate
+        // click dots to navigate
         dots.forEach((d, i) => d.addEventListener("click", () => setActive(i)));
 
-        // Optional: simple auto-advance (uncomment to enable)
-        // setInterval(() => setActive(index + 1), 5000);
+        // simple auto-advance
+        setInterval(() => setActive(index + 1), 5000);
 
-        // Optional: basic swipe (touch)
+        // basic swipe (touch)
         let startX = null;
         track.addEventListener(
           "touchstart",
