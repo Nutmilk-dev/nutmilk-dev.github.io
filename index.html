@@ -141,14 +141,18 @@
       }
       .seal {
         position: absolute;
-        right: 16px;
-        bottom: 16px;
+        top: 16px;
+        left: 50%;
+        transform: translateX(-50%);
         background: #fff;
         border: 1px solid var(--line);
-        padding: 10px 12px;
+        padding: 10px 14px;
         border-radius: 12px;
-        font: 600 13px Inter;
+        font: 600 13px Inter, system-ui, -apple-system;
         color: var(--muted);
+        z-index: 3; /* stays above carousel content */
+        box-shadow: 0 4px 16px rgba(42, 34, 27, 0.08);
+        backdrop-filter: saturate(110%) blur(2px);
       }
       .grid {
         margin: 40px 0;
@@ -213,6 +217,90 @@
         .grid {
           grid-template-columns: 1fr;
         }
+      }
+
+      .carousel {
+        position: relative;
+        overflow: hidden;
+        border-radius: 18px;
+        background: #fff;
+        box-shadow: 0 10px 40px rgba(42, 34, 27, 0.1);
+        isolation: isolate;
+      }
+
+      .carousel__track {
+        position: relative;
+        height: 100%;
+        min-height: 320px; /* adapt as needed; keeps height stable */
+      }
+
+      .carousel__slide {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        transition: opacity 280ms ease;
+        pointer-events: none;
+      }
+
+      .carousel__slide.is-active {
+        position: relative;
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .carousel__slide img {
+        display: block;
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+      }
+
+      .carousel__controls {
+        position: absolute;
+        inset: auto 0 10px 0;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        z-index: 2;
+      }
+
+      .carousel__btn {
+        appearance: none;
+        border: 1px solid var(--line);
+        background: #fff;
+        font: 600 12px/1 Inter, system-ui, -apple-system;
+        color: var(--muted);
+        padding: 8px 10px;
+        border-radius: 10px;
+        cursor: pointer;
+        backdrop-filter: saturate(110%) blur(2px);
+      }
+
+      .carousel__btn:focus {
+        outline: 2px solid var(--gold);
+        outline-offset: 2px;
+      }
+
+      /* Dots */
+      .carousel__dots {
+        position: absolute;
+        left: 12px;
+        bottom: 12px;
+        display: inline-flex;
+        gap: 6px;
+        z-index: 2;
+      }
+
+      .carousel__dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: #0002;
+        border: 1px solid var(--line);
+      }
+      .carousel__dot.is-active {
+        background: var(--gold);
+        border-color: var(--gold);
       }
     </style>
   </head>
@@ -283,14 +371,63 @@
         </div>
 
         <figure class="bottle" aria-label="Bottle of Nuna’s Nutmilk">
-          <picture>
-            <img
-              src="imgs/MELK.png"
-              srcset="imgs/MELK.png
-              alt="Nuna’s Nutmilk bottle with mixed nuts"
-              style="display: block; width: 100%; height: auto"
-            />
-          </picture>
+          <div
+            class="carousel"
+            role="region"
+            aria-roledescription="carousel"
+            aria-label="Nutmilk bottle gallery"
+          >
+            <div class="carousel__track" id="nmTrack">
+              <!-- Slide 1 -->
+              <div
+                class="carousel__slide is-active"
+                data-index="0"
+                role="group"
+                aria-roledescription="slide"
+                aria-label="1 of 2"
+              >
+                <img
+                  src="imgs/MELK.png"
+                  alt="Nuna’s Nutmilk bottle with mixed nuts"
+                />
+              </div>
+
+              <div
+                class="carousel__slide"
+                data-index="1"
+                role="group"
+                aria-roledescription="slide"
+                aria-label="2 of 2"
+              >
+                <img
+                  src="imgs/nuna_nut_WIP.png"
+                  alt="Nuna’s Nutmilk bottle variant with alternative styling"
+                />
+              </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="carousel__controls" aria-controls="nmTrack">
+              <button
+                class="carousel__btn"
+                id="nmPrev"
+                aria-label="Previous image"
+              >
+                Prev
+              </button>
+              <button class="carousel__btn" id="nmNext" aria-label="Next image">
+                Next
+              </button>
+            </div>
+
+            <!-- Dots -->
+            <div class="carousel__dots" id="nmDots" aria-hidden="true">
+              <span class="carousel__dot is-active"></span>
+              <span class="carousel__dot"></span>
+            </div>
+          </div>
+
+          <!-- Persistent seal across all slides -->
           <div class="seal">Batch Nº 001 • 2025</div>
         </figure>
       </section>
@@ -414,6 +551,61 @@
       <p>${review.text}</p>`;
         reviewsContainer.appendChild(reviewCard);
       });
+
+      (function () {
+        const track = document.getElementById("nmTrack");
+        const slides = Array.from(track.querySelectorAll(".carousel__slide"));
+        const prevBtn = document.getElementById("nmPrev");
+        const nextBtn = document.getElementById("nmNext");
+        const dotsWrap = document.getElementById("nmDots");
+        const dots = Array.from(dotsWrap.children);
+
+        let index = 0;
+
+        function setActive(i) {
+          slides[index].classList.remove("is-active");
+          dots[index]?.classList.remove("is-active");
+          index = (i + slides.length) % slides.length;
+          slides[index].classList.add("is-active");
+          dots[index]?.classList.add("is-active");
+          // Update slide aria-labels if you add more slides dynamically
+        }
+
+        prevBtn.addEventListener("click", () => setActive(index - 1));
+        nextBtn.addEventListener("click", () => setActive(index + 1));
+
+        // Keyboard support when buttons are focused
+        [prevBtn, nextBtn].forEach((btn) => {
+          btn.addEventListener("keydown", (e) => {
+            if (e.key === "ArrowLeft") setActive(index - 1);
+            if (e.key === "ArrowRight") setActive(index + 1);
+          });
+        });
+
+        // Optional: click dots to navigate
+        dots.forEach((d, i) => d.addEventListener("click", () => setActive(i)));
+
+        // Optional: simple auto-advance (uncomment to enable)
+        // setInterval(() => setActive(index + 1), 5000);
+
+        // Optional: basic swipe (touch)
+        let startX = null;
+        track.addEventListener(
+          "touchstart",
+          (e) => {
+            startX = e.touches[0].clientX;
+          },
+          { passive: true }
+        );
+        track.addEventListener("touchend", (e) => {
+          if (startX == null) return;
+          const dx = e.changedTouches[0].clientX - startX;
+          const threshold = 40;
+          if (dx > threshold) setActive(index - 1);
+          else if (dx < -threshold) setActive(index + 1);
+          startX = null;
+        });
+      })();
     </script>
   </body>
 </html>
